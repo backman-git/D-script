@@ -20,8 +20,9 @@ syscall::bind:entry
 }
 
 syscall::bind:return
-/self->port != 0/
+/self->port != 0 && execname == $1/
 {
     printf("%s %d -> port:%d\n", execname, pid, self->port);
+    ustack(50);
     self->port = 0;
 }
